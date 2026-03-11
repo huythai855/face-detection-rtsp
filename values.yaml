@@ -1,6 +1,6 @@
 image:
   repository: "huythai855/face-detection-app"
-  tag: "v1"
+  tag: "v2"
 
 config:
   input:

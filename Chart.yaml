@@ -1,0 +1,5 @@
+apiVersion: v2
+name: face-detection
+description: A lightweight face detection helm chart with RTSP input and Telegram output.
+version: 0.1.0
+appVersion: "1.0.0"

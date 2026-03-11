@@ -1,0 +1,32 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: face-detection-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  predictor:
+    containers:
+      - name: kserve-container # KServe bắt buộc đặt tên hoặc dùng port 8080 mặc định
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        env:
+          - name: RTSP_URL
+            value: {{ .Values.config.input.rtspUrl | quote }}
+          - name: TELEGRAM_TOKEN
+            value: {{ .Values.config.output.telegram.botToken | quote }}
+          - name: TELEGRAM_CHAT_ID
+            value: {{ .Values.config.output.telegram.chatId | quote }}
+          - name: THRESHOLD
+            value: {{ .Values.config.processing.threshold | quote }}
+        ports:
+          - containerPort: 8501 # Port của Streamlit
+            protocol: TCP
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu | quote }}
+            memory: {{ .Values.resources.limits.memory | quote }}
+            {{- if .Values.resources.limits.gpu }}
+            nvidia.com/gpu: {{ .Values.resources.limits.gpu | quote }}
+            {{- end }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu | quote }}
+            memory: {{ .Values.resources.requests.memory | quote }}

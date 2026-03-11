@@ -1,0 +1,21 @@
+image:
+  repository: "huythai855/face-detection-app"
+  tag: "v1"
+
+config:
+  input:
+    rtspUrl: "rtsp://admin:123456@192.168.1.10:554/live"
+  processing:
+    threshold: "0.5"
+  output:
+    telegram:
+      botToken: "123456789:ABCDEF..."
+      chatId: "987654321"
+
+resources:
+  requests:
+    cpu: "500m"      
+    memory: "512Mi"  
+  limits:
+    cpu: "2000m"    
+    memory: "2Gi"    

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "face-detection.fullname" . }}-config
+data:
+  RTSP_URL: {{ .Values.config.input.rtspUrl | quote }}
+  FACE_THRESHOLD: {{ .Values.config.processing.threshold | quote }}
+  TELEGRAM_ENABLED: {{ .Values.config.output.telegram.enabled | quote }}
+  TELEGRAM_TOKEN: {{ .Values.config.output.telegram.botToken | quote }}
+  TELEGRAM_CHAT_ID: {{ .Values.config.output.telegram.chatId | quote }}
